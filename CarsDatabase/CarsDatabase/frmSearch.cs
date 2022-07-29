@@ -67,7 +67,7 @@ namespace CarsDatabase
                 dgvCars.DataSource = dataTable;
 
                 //Changing the display format of the date registered and rental per day displayed
-                dgvCars.Columns[3].DefaultCellStyle.Format = "yyyy/MM/dd";
+                dgvCars.Columns[3].DefaultCellStyle.Format = "dd/MM/yyyy";
                 dgvCars.Columns[4].DefaultCellStyle.Format = "C";
                 dgvCars.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 

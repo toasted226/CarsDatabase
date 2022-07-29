@@ -1,4 +1,5 @@
 using System.Data;
+using System.Globalization;
 
 namespace CarsDatabase
 {
@@ -7,7 +8,7 @@ namespace CarsDatabase
         public frmCars()
         {
             InitializeComponent();
-            Text = $"Task A Keagan {DateTime.Today:d}";
+            Text = $"Task A  {DateTime.Today:d}";
         }
 
         static int recordsCount;
@@ -20,6 +21,13 @@ namespace CarsDatabase
 
         public Database ReadyDatabase()
         {
+            string dateRegistered = "";
+
+            if (txtDateRegistered.Text != "")
+            {
+                dateRegistered = DateTime.ParseExact(txtDateRegistered.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture).ToString("yyyy/MM/dd");
+            }
+
             decimal rentalPerDay = 0;
             if (txtRentalPerDay.Text != "")
             {
@@ -27,7 +35,7 @@ namespace CarsDatabase
                 rentalPerDay = Convert.ToDecimal(fixedRPD);
             }
 
-            return new Database(txtVehicleRegNo.Text, txtMake.Text, txtEngineSize.Text, txtDateRegistered.Text, rentalPerDay, chkAvailable.Checked);
+            return new Database(txtVehicleRegNo.Text, txtMake.Text, txtEngineSize.Text, dateRegistered, rentalPerDay, chkAvailable.Checked);
         }
 
         public void LoadData()
@@ -45,7 +53,7 @@ namespace CarsDatabase
                 txtVehicleRegNo.Text = dataTable.Rows[0].Field<string>(0);
                 txtMake.Text = dataTable.Rows[0].Field<string>(1);
                 txtEngineSize.Text = dataTable.Rows[0].Field<string>(2);
-                txtDateRegistered.Text = Convert.ToString(dataTable.Rows[0].Field<DateTime>(3).ToString("yyyy/MM/dd"));
+                txtDateRegistered.Text = Convert.ToString(dataTable.Rows[0].Field<DateTime>(3).ToString("dd/MM/yyyy"));
                 txtRentalPerDay.Text = Convert.ToString(dataTable.Rows[0].Field<decimal>(4).ToString("C"));
                 chkAvailable.Checked = dataTable.Rows[0].Field<bool>(5);
                 UpdateRecordDisplay();
@@ -69,7 +77,7 @@ namespace CarsDatabase
             }
             else 
             {
-                MessageBox.Show("The date registered field cannot be left blank.");
+                MessageBox.Show("None of the fields may be left blank");
             }
         }
 
@@ -133,7 +141,7 @@ namespace CarsDatabase
                     txtVehicleRegNo.Text = dataTable.Rows[rowNum].Field<string>(0);
                     txtMake.Text = dataTable.Rows[rowNum].Field<string>(1);
                     txtEngineSize.Text = dataTable.Rows[rowNum].Field<string>(2);
-                    txtDateRegistered.Text = Convert.ToString(dataTable.Rows[rowNum].Field<DateTime>(3).ToString("yyyy/MM/dd"));
+                    txtDateRegistered.Text = Convert.ToString(dataTable.Rows[rowNum].Field<DateTime>(3).ToString("dd/MM/yyyy"));
                     txtRentalPerDay.Text = Convert.ToString(dataTable.Rows[rowNum].Field<decimal>(4).ToString("C"));
                     chkAvailable.Checked = dataTable.Rows[rowNum].Field<bool>(5);
                 }
@@ -164,7 +172,7 @@ namespace CarsDatabase
                     txtVehicleRegNo.Text = dataTable.Rows[rowNum].Field<string>(0);
                     txtMake.Text = dataTable.Rows[rowNum].Field<string>(1);
                     txtEngineSize.Text = dataTable.Rows[rowNum].Field<string>(2);
-                    txtDateRegistered.Text = Convert.ToString(dataTable.Rows[rowNum].Field<DateTime>(3).ToString("yyyy/MM/dd"));
+                    txtDateRegistered.Text = Convert.ToString(dataTable.Rows[rowNum].Field<DateTime>(3).ToString("dd/MM/yyyy"));
                     txtRentalPerDay.Text = Convert.ToString(dataTable.Rows[rowNum].Field<decimal>(4).ToString("C"));
                     chkAvailable.Checked = dataTable.Rows[rowNum].Field<bool>(5);
                 }
@@ -192,7 +200,7 @@ namespace CarsDatabase
                 txtVehicleRegNo.Text = dataTable.Rows[0].Field<string>(0);
                 txtMake.Text = dataTable.Rows[0].Field<string>(1);
                 txtEngineSize.Text = dataTable.Rows[0].Field<string>(2);
-                txtDateRegistered.Text = Convert.ToString(dataTable.Rows[0].Field<DateTime>(3).ToString("yyyy/MM/dd"));
+                txtDateRegistered.Text = Convert.ToString(dataTable.Rows[0].Field<DateTime>(3).ToString("dd/MM/yyyy"));
                 txtRentalPerDay.Text = Convert.ToString(dataTable.Rows[0].Field<decimal>(4).ToString("C"));
                 chkAvailable.Checked = dataTable.Rows[0].Field<bool>(5);
 
@@ -216,7 +224,7 @@ namespace CarsDatabase
                 txtVehicleRegNo.Text = dataTable.Rows[recordsCount - 1].Field<string>(0);
                 txtMake.Text = dataTable.Rows[recordsCount - 1].Field<string>(1);
                 txtEngineSize.Text = dataTable.Rows[recordsCount - 1].Field<string>(2);
-                txtDateRegistered.Text = Convert.ToString(dataTable.Rows[recordsCount - 1].Field<DateTime>(3).ToString("yyyy/MM/dd"));
+                txtDateRegistered.Text = Convert.ToString(dataTable.Rows[recordsCount - 1].Field<DateTime>(3).ToString("dd/MM/yyyy"));
                 txtDateRegistered.Text = Convert.ToString(dataTable.Rows[recordsCount - 1].Field<decimal>(4).ToString("C"));
                 chkAvailable.Checked = dataTable.Rows[recordsCount - 1].Field<bool>(5);
 
