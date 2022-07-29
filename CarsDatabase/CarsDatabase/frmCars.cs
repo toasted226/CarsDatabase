@@ -8,7 +8,7 @@ namespace CarsDatabase
         public frmCars()
         {
             InitializeComponent();
-            Text = $"Task A  {DateTime.Today:d}";
+            Text = $"Task A Keagan {DateTime.Today:d}";
         }
 
         static int recordsCount;
@@ -22,6 +22,8 @@ namespace CarsDatabase
         public Database ReadyDatabase()
         {
             string dateRegistered = "";
+
+            Console.WriteLine($"{txtRentalPerDay.Text}, {txtDateRegistered.Text}");
 
             if (txtDateRegistered.Text != "")
             {
@@ -221,12 +223,12 @@ namespace CarsDatabase
             {
                 recordsCount = dataTable.Rows.Count;
 
-                txtVehicleRegNo.Text = dataTable.Rows[recordsCount - 1].Field<string>(0);
-                txtMake.Text = dataTable.Rows[recordsCount - 1].Field<string>(1);
-                txtEngineSize.Text = dataTable.Rows[recordsCount - 1].Field<string>(2);
-                txtDateRegistered.Text = Convert.ToString(dataTable.Rows[recordsCount - 1].Field<DateTime>(3).ToString("dd/MM/yyyy"));
-                txtDateRegistered.Text = Convert.ToString(dataTable.Rows[recordsCount - 1].Field<decimal>(4).ToString("C"));
-                chkAvailable.Checked = dataTable.Rows[recordsCount - 1].Field<bool>(5);
+                txtVehicleRegNo.Text = dataTable.Rows[0].Field<string>(0);
+                txtMake.Text = dataTable.Rows[0].Field<string>(1);
+                txtEngineSize.Text = dataTable.Rows[0].Field<string>(2);
+                txtDateRegistered.Text = Convert.ToString(dataTable.Rows[0].Field<DateTime>(3).ToString("dd/MM/yyyy"));
+                txtRentalPerDay.Text = Convert.ToString(dataTable.Rows[0].Field<decimal>(4).ToString("C"));
+                chkAvailable.Checked = dataTable.Rows[0].Field<bool>(5);
 
                 rowNum = recordsCount - 1;
                 UpdateRecordDisplay();
